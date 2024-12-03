@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getMethod } from '@services/request'; // Adjust the import path as needed
+import { getMethod } from '@services/Request'; // Adjust the import path as needed
 import { formatMoney } from '@services/Formatmoney';
 
 function ProductDetail() {

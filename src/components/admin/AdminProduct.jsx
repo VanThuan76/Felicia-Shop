@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getMethodByToken } from '@services/request';
+import { getMethodByToken } from '@services/Request';
 import { formatMoney } from '@services/Formatmoney';
 import { useNavigate } from 'react-router-dom'; // Importing useNavigate for navigation
 
@@ -11,7 +11,7 @@ const AdminProduct = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
-  
+
   const navigate = useNavigate(); // Initialize useNavigate hook
 
   useEffect(() => {
@@ -81,7 +81,7 @@ const AdminProduct = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            
+
           </div>
         </div>
       </div>

@@ -15,39 +15,39 @@ const HomeAdmin = () => {
     const getThongKe = async () => {
       const responseMonth = await getMethodByToken(`${apiUrl}/api/statistic/admin/revenue-this-month`);
       setDoanhThu(await responseMonth.text());
-  
+
       const responseToday = await getMethodByToken(`${apiUrl}/api/statistic/admin/revenue-today`);
       setDoanhThuHomNay(await responseToday.text());
-  
+
       const responseAdmins = await getMethodByToken(`${apiUrl}/api/statistic/admin/number-admin`);
       setQt(await responseAdmins.text());
-  
+
       const responseInvoices = await getMethodByToken(`${apiUrl}/api/statistic/admin/number-invoice-today-finish`);
       setDonHoanThanhHomNay(await responseInvoices.text());
     };
-  
+
     const getProductBanChay = async () => {
       const response = await getMethodByToken(`${apiUrl}/api/product/public/san-pham-ban-chay`);
       setItems(await response.json());
     };
-  
+
     const getMauSac = () => {
       const colors = ['#4e73df', '#1cc88a', '#36b9cc', '#eb9534', '#ed00c6', '#edd500'];
       const actElements = document.getElementsByClassName('border-left');
       const labelElements = document.getElementsByClassName('lbcard');
-  
+
       Array.from(actElements).forEach((el, i) => {
         el.style.borderLeft = `.25rem solid ${colors[i]}`;
       });
-  
+
       Array.from(labelElements).forEach((el, i) => {
         el.style.color = colors[i];
       });
     };
-  
+
     const revenueYear = async (year) => {
       if (year < 2000) year = new Date().getFullYear();
-  
+
       const url = `${apiUrl}/api/statistic/admin/revenue-year?year=${year}`;
       const response = await fetch(url, {
         method: 'GET',
@@ -56,13 +56,13 @@ const HomeAdmin = () => {
         },
       });
       const list = await response.json();
-  
+
       const labels = Array.from({ length: 12 }, (_, i) => `tháng ${i + 1}`);
       const ctx = document.getElementById('chart').getContext('2d');
-  
+
       let chartStatus = Chart.getChart('chart');
       if (chartStatus) chartStatus.destroy();
-  
+
       new Chart(ctx, {
         type: 'bar',
         data: {
@@ -87,13 +87,13 @@ const HomeAdmin = () => {
         },
       });
     };
-  
+
     getThongKe();
     getProductBanChay();
     getMauSac();
     revenueYear(new Date().getFullYear());
   }, []);  // This ensures the effect runs once on mount.
-  
+
 
   async function revenueYear(year) {
     if (year < 2000) year = new Date().getFullYear();
@@ -226,7 +226,7 @@ const HomeAdmin = () => {
                 <tr key={item.id}>
                   <td>{item.id}</td>
                   <td>
-                    <img src={item.imageBanner} className="imgadmin" alt="banner" 
+                    <img src={item.imageBanner} className="imgadmin" alt="banner"
                     style={{ width: '50px', height: '50px', objectFit: 'cover' }}/>
                   </td>
                   <td>{item.name}</td>

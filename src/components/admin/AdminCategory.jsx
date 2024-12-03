@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getMethodByToken, uploadSingleFile } from '@services/request';
+import { getMethodByToken, uploadSingleFile } from '@services/Request';
 
 const token = localStorage.getItem('token');
 
@@ -33,25 +33,25 @@ const AdminCategory = () => {
     event.preventDefault();
     const id = event.target.elements.idcate.value;
     const name = event.target.elements.catename.value;
-  
+
     let image = cate?.image; // Mặc định giữ hình ảnh cũ nếu không thay đổi
-  
+
     const fileInput = document.getElementById('fileimage');
     if (fileInput.files && fileInput.files.length > 0) {
       // Nếu người dùng chọn hình ảnh mới
       image = await uploadSingleFile(fileInput);
     }
-  
+
     const payload = {
       id,
       name,
       image,
     };
-  
+
     const url = id
       ? `${apiUrl}/api/category/admin/update`
-      : `${apiUrl}/api/category/admin/create`; 
-  
+      : `${apiUrl}/api/category/admin/create`;
+
       const res = await fetch(url, {
         method: 'POST',
         headers: {
@@ -61,7 +61,7 @@ const AdminCategory = () => {
         body: JSON.stringify(payload),
       });
 
-  
+
     if (res.status < 300) {
       const result = await res.json();
       toast.success(id ? 'Cập nhật danh mục thành công!' : 'Thêm danh mục thành công!');
@@ -71,7 +71,7 @@ const AdminCategory = () => {
       } else {
         setItems((prevItems) => [...prevItems, result]);
       }
-      clearInput(); 
+      clearInput();
       document.getElementById('addCategoryCloseBtn').click();
       window.location.reload();
     } else if (res.status === 417) {
@@ -80,7 +80,7 @@ const AdminCategory = () => {
       window.location.reload();
     }
   };
-  
+
 
   const deleteCategory = async (id) => {
     const confirmDelete = window.confirm('Bạn chắc chắn muốn xóa danh mục này?');

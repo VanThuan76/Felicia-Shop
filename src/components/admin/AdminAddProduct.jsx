@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getMethodByToken, uploadSingleFile, uploadMultipleFile } from '@services/request';
+import { getMethodByToken, uploadSingleFile, uploadMultipleFile } from '@services/Request';
 import Swal from 'sweetalert2';
 var token = localStorage.getItem("token");
 
@@ -110,9 +110,9 @@ const AdminAddProduct = () => {
             </div>
         </div>
         <div className="col-sm-12">
-            <div className="form-add" style={{ marginLeft: '120px' }}> 
+            <div className="form-add" style={{ marginLeft: '120px' }}>
                 <form className="row" onSubmit={saveProduct} method="post">
-                    <div className="col-md-4 col-sm-4 col-12" style={{ marginBottom: '5px' }}> 
+                    <div className="col-md-4 col-sm-4 col-12" style={{ marginBottom: '5px' }}>
                         <label className="mt-3 lb-form">Tên sản phẩm</label>
                         <input
                             name="tensp"
@@ -125,7 +125,7 @@ const AdminAddProduct = () => {
                             defaultValue={product == null ? '' : product.price}
                             className="form-control"
                         />
-                        
+
                         <label className="lb-form">Danh mục</label>
                             <select name="danhmuc" className="form-control">
                                 {itemDanhmuc.map((item) => {
@@ -158,7 +158,7 @@ const AdminAddProduct = () => {
                             src={product == null ? '' : product.image}
                             id="imgpreproduct"
                             className="imgadmin"
-                            style={{ width: '100%', marginTop: '15px' }} 
+                            style={{ width: '100%', marginTop: '15px' }}
                         />
                         <br /><br />
                     </div>
@@ -171,8 +171,8 @@ const AdminAddProduct = () => {
             </div>
         </div>
     </div>
-    
-    
+
+
 
 
     );

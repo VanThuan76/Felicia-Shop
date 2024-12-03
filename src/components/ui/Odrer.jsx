@@ -1,5 +1,5 @@
 
-import { getMethodByToken, getMethodPostByToken } from '@services/request';
+import { getMethodByToken, getMethodPostByToken } from '@services/Request';
 import { formatMoney } from '@services/Formatmoney';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
@@ -120,7 +120,7 @@ function PublicAccount() {
                 <td>{item.statusInvoice}</td>
                 <td>{formatMoney(item.totalAmount)} {item.voucher == null ? '' : '-' + formatMoney(item.voucher.discount)}</td>
                 <td>
-                  {(item.statusInvoice === 'DANG_CHO_XAC_NHAN' || item.statusInvoice === 'DA_XAC_NHAN') && item.payType === 'COD' ? 
+                  {(item.statusInvoice === 'DANG_CHO_XAC_NHAN' || item.statusInvoice === 'DA_XAC_NHAN') && item.payType === 'COD' ?
                     <i onClick={() => cancelInvoice(item.id)} className="bi bi-trash action-icon"></i> : ''}
                   <i onClick={() => getInvoiceDetail(item.id)} data-bs-toggle="modal" data-bs-target="#modaldeail" className="bi bi-eye action-icon"></i>
                 </td>
@@ -129,7 +129,7 @@ function PublicAccount() {
           </tbody>
         </table>
       </div>
-      
+
       <div className="modal fade" id="modaldeail" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
@@ -164,7 +164,7 @@ function PublicAccount() {
       </div>
     </>
   );
-  
+
 }
 
 export default PublicAccount;

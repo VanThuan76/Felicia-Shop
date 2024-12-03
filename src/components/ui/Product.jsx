@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getMethod, getMethodByToken, getMethodPostByToken} from '@services/request'; // Điều chỉnh đường dẫn nếu cần
+import { getMethod, getMethodByToken, getMethodPostByToken} from '@services/Request'; // Điều chỉnh đường dẫn nếu cần
 import { formatMoney } from '@services/Formatmoney';
 import { toast } from 'react-toastify';
 function ProductDetail() {
@@ -9,25 +9,25 @@ function ProductDetail() {
     const [relatedProducts, setRelatedProducts] = useState([]);
     const [quantity, setQuantity] = useState(1);
     const navigate = useNavigate();
-   
+
     useEffect(() => {
         const fetchProductDetail = async () => {
             try {
                 const uls = new URL(window.location.href);
                 const productId = uls.searchParams.get('productId');
-                
+
                 const result = await getMethod(`${apiUrl}/api/product/public/findById?id=${productId}`);
-                console.log('Product details:', result); 
+                console.log('Product details:', result);
                 setProduct(result);
-        
+
                 const relatedResult = await getMethod(`${apiUrl}/api/product/public/san-pham-lien-quan?id=${productId}`);
-                console.log('Related products:', relatedResult); 
+                console.log('Related products:', relatedResult);
                 setRelatedProducts(relatedResult || []);
             } catch (error) {
                 console.error('Lỗi khi lấy chi tiết sản phẩm:', error);
             }
         };
-        
+
         fetchProductDetail();
     }, []);
 
@@ -40,7 +40,7 @@ function ProductDetail() {
           toast.error('Có lỗi xảy ra khi tải giỏ hàng.');
         }
       }
-    
+
       async function updateCartItem(id, quantity) {
         try {
           const url = `${apiUrl}/api/cart/user/up-and-down-cart?id=${id}&quantity=${quantity}`;
@@ -51,7 +51,7 @@ function ProductDetail() {
           toast.error('Có lỗi xảy ra khi cập nhật giỏ hàng.');
         }
       }
-      
+
     const addToCart = async (product,newQuantity) => {
         try {
             const response = await getMethodByToken(`${apiUrl}/api/cart/user/my-cart`);
@@ -81,18 +81,18 @@ function ProductDetail() {
             toast.error('Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.');
         }
     };
-    
-    
+
+
     const handleQuantityChange = (e) => {
         const newQuantity = Number(e.target.value);
-    
+
         if (newQuantity <= 1) {
             alert("Số lượng phải lớn hơn 1!");
         } else {
             setQuantity(newQuantity);
         }
     };
-    
+
 
     const handleNavigate = (productId, productName) => {
         navigate(`/product?productId=${productId}&productName=${productName}`);

@@ -7,8 +7,8 @@ function Header() {
   const apiUrl = import.meta.env.VITE_API_URL;
   const [items, setItems] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]); 
-  const [filteredProducts, setFilteredProducts] = useState([]); 
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [showProductDropdown, setShowProductDropdown] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
@@ -40,36 +40,36 @@ const handleProductClick = (product) => {
         console.error('Error fetching categories:', error);
       }
     };
-  
+
     const fetchProducts = async () => {
       try {
         const response = await getMethodByToken(`${apiUrl}/api/product/public/findAll-list`);
         const productList = await response.json();
         setProducts(productList);
-        setFilteredProducts(productList); 
+        setFilteredProducts(productList);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
     };
-  
+
     fetchCategories();
     fetchProducts();
-  
+
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowProfileDropdown(false);
       }
     };
-  
+
     document.addEventListener('mousedown', handleClickOutside);
-  
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []); 
+  }, []);
   useEffect(() => {
     const fetchCartItems = async () => {
-      if (isLoggedIn) { 
+      if (isLoggedIn) {
         try {
           const response = await getMethodByToken(`${apiUrl}/api/cart/user/my-cart`);
           const list = await response.json();
@@ -79,10 +79,10 @@ const handleProductClick = (product) => {
         }
       }
     };
-  
+
     fetchCartItems();
-  }, [isLoggedIn]); 
-  
+  }, [isLoggedIn]);
+
 
   const handleNavigate = (categoryId, categoryName) => {
     navigate(`/category?categoryId=${categoryId}&categoryName=${(categoryName)}`);
@@ -152,7 +152,7 @@ const handleProductClick = (product) => {
                 </li>
                 <li><a href="/home"> <h5 className="mt-3">Cửa hàng</h5></a></li>
                 <li><a href="/home"> <h5 className="mt-3">Liên hệ</h5></a></li>
-                
+
                   {isLoggedIn ? (
                     <li>
                     <div style={{ display: 'flex', alignItems: 'center', position: 'relative', paddingTop: '5px' }}>
@@ -240,7 +240,7 @@ const handleProductClick = (product) => {
                   ) : (
                     <li className='mt-2'><Link to="/login" className="bi bi-person-circle header-default" style={{ fontSize: '24px', cursor: 'pointer', marginTop: '30px' }}></Link></li>
                   )}
-                
+
               </ul>
             </div>
           </div>

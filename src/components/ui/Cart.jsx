@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { getMethodByToken, getMethodDeleteByToken, getMethodPostPayload } from '@services/request';
+import { getMethodByToken, getMethodDeleteByToken, getMethodPostPayload } from '@services/Request';
 import { formatMoney } from '@services/Formatmoney';
 import Swal from 'sweetalert2';
 
@@ -102,17 +102,17 @@ function PublicCart() {
   async function handleCheckout() {
     const confirmation = window.confirm('Xác nhận đặt hàng!');
     if (!confirmation) return;
-  
-  
+
+
     const orderDto = {
-      payType: "COD", 
+      payType: "COD",
       fullname: document.getElementById("fullname").value,
       phone: document.getElementById("phone").value,
       address: document.getElementById("diachinhan").value,
       note: document.getElementById("ghichudonhang").value,
       codeVoucher: "", // Optional: Set voucher code if applicable
     };
-  
+
     try {
       const url = `${apiUrl}/api/invoice/user/create`;
       const res = await getMethodPostPayload(url, orderDto);
@@ -142,7 +142,7 @@ function PublicCart() {
       console.error('Lỗi khi xử lý đơn hàng:', error.message);
       toast.error('Có lỗi xảy ra khi thanh toán.');
     }
-    
+
   }
 
   // Handle form validation before checkout

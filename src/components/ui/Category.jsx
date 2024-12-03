@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { getMethod,getMethodByToken, getMethodPostByToken } from '@services/request';
+import { getMethod,getMethodByToken, getMethodPostByToken } from '@services/Request';
 import { formatMoney } from '@services/Formatmoney';
 import { toast } from 'react-toastify';
 
@@ -21,8 +21,8 @@ function Category() {
             try {
                 const url = `${apiUrl}/api/product/public/findAll-list`;
                 const response = await getMethod(url);
-                console.log('API response:', response); 
-        
+                console.log('API response:', response);
+
                 if (response && Array.isArray(response)) {
                     const filteredProducts = response.filter(
                         (product) => product.category && product.category.id === parseInt(categoryId, 10)
@@ -51,7 +51,7 @@ function Category() {
           toast.error('Có lỗi xảy ra khi tải giỏ hàng.');
         }
       }
-    
+
       async function updateCartItem(id, quantity) {
         try {
           const url = `${apiUrl}/api/cart/user/up-and-down-cart?id=${id}&quantity=${quantity}`;
@@ -61,7 +61,7 @@ function Category() {
           toast.error('Có lỗi xảy ra khi cập nhật giỏ hàng.');
         }
       }
-      
+
     const addToCart = async (product,newQuantity) => {
         try {
             const response = await getMethodByToken(`${apiUrl}/api/cart/user/my-cart`);

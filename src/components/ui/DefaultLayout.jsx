@@ -3,7 +3,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { getMethod, getMethodPostByToken, getMethodByToken} from '@services/request';
+import { getMethod, getMethodPostByToken, getMethodByToken} from '@services/Request';
 import { formatMoney } from '@services/Formatmoney';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -17,7 +17,7 @@ function DefaultLayout() {
         const fetchProducts = async () => {
             try {
                 const result = await getMethod(`${apiUrl}/api/product/public/find-all`);
-                setProducts(result.content); 
+                setProducts(result.content);
             } catch (error) {
                 console.error('Error fetching products:', error);
             }
@@ -38,7 +38,7 @@ function DefaultLayout() {
           toast.error('Có lỗi xảy ra khi tải giỏ hàng.');
         }
       }
-    
+
       async function updateCartItem(id, quantity) {
         try {
           const url = `${apiUrl}/api/cart/user/up-and-down-cart?id=${id}&quantity=${quantity}`;
@@ -48,7 +48,7 @@ function DefaultLayout() {
           toast.error('Có lỗi xảy ra khi cập nhật giỏ hàng.');
         }
       }
-      
+
     const addToCart = async (product,newQuantity) => {
         try {
             const response = await getMethodByToken(`${apiUrl}/api/cart/user/my-cart`);
@@ -78,7 +78,7 @@ function DefaultLayout() {
             toast.error('Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.');
         }
     };
-    
+
 
     return (
         <>
