@@ -12,6 +12,11 @@ export default defineConfig({
       "@contexts": path.resolve(__dirname, "src/context"),
     },
   },
+  build: {
+    commonjsOptions: {
+      include: [/src/, /node_modules/],
+    },
+  },
   server: {
     host: "0.0.0.0",
     port: 5173,
